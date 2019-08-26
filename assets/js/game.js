@@ -10,7 +10,7 @@ console.log(compGuess)
   
 document.onkeydown = function (event) {  
       var yourguess = event.key;
-
+//how do i loop the variable/function compGuess without having to put it in the if statement
 if (yourguess !== compGuess) {
 guesses--;
 }else{
@@ -28,7 +28,11 @@ compGuess = letters[Math.floor(Math.random() * letters.length)];
 console.log(compGuess);
 }
 
-
+guessed.push(yourguess);
+document.getElementById('wins').innerHTML = wins;
+document.getElementById('losses').innerHTML = losses;
+document.getElementById('guesses').innerHTML = guesses;      
+document.getElementById('guessed').innerHTML = guessed;
 
 }
 
