@@ -1,3 +1,3 @@
-#Letter Guess
-a simple letter guessing game that shows wins, losses, and guesses left.
+#Weather Lite
+
 https://ashamrock.github.io/WeatherLTE/
