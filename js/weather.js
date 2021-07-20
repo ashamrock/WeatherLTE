@@ -73,9 +73,6 @@ function weatherBalloon() {
         case "Mist":
           climate = '<div icon="stormy" data-label="Soggy"><span class="cloud"></span><ul><li></li><li></li><li></li><li></li><li></li></ul></div>';
           break;
-        case "Haze":
-          climate = '<div icon="stormy" data-label="Soggy"><span class="cloud"></span><ul><li></li><li></li><li></li><li></li><li></li></ul></div>';
-          break;
         case "Rain":
           climate = '<div icon="stormy" data-label="Soggy"><span class="cloud"></span><ul><li></li><li></li><li></li><li></li><li></li></ul></div>';
           break;
@@ -89,6 +86,9 @@ function weatherBalloon() {
         //   climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
         //   break;
         case "Clouds":
+          climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span><span class="cloud"></span></div>';
+          break;
+        case "Haze":
           climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span><span class="cloud"></span></div>';
           break;
         default:
