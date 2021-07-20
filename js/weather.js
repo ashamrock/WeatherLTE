@@ -89,7 +89,7 @@ function weatherBalloon() {
           climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span><span class="cloud"></span></div>';
           break;
         case "Haze":
-          climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span><span class="cloud"></span></div>';
+          climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
           break;
         default:
             text = '<div icon="supermoon" data-label="Cool!"><span class="moon"></span><span class="meteor"></span></div>';
