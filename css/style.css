@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:300,300italic");
+/*@import url("https://fonts.googleapis.com/css?family=Lato:300,300italic");*/
 
 /* ---------- vv Common vv ---------- */
 
 body {
-  font-family: "Arial, sans-serif";
+  font-family: "Arial";
   /* line-height: 1.5; */
   color: rgba(255, 255, 255, 0.836);
   background-color: black;
