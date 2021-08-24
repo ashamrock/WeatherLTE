@@ -18,8 +18,10 @@ update();
 
 function weatherBalloon() {
 
-  myApi = "https://api.openweathermap.org/data/2.5/onecall?lat=41.667070&lon=-81.325810&units=imperial&exclude={part}&appid=21430ad3b0a3d0f259cf25939a71772c"
-  key = '21430ad3b0a3d0f259cf25939a71772c';
+  la = config.SECRET_LA;
+  lo = config.SECRET_LO;
+  key = config.MY_KEY;
+  myApi = "https://api.openweathermap.org/data/2.5/onecall?"+la+"&"+lo+"&units=imperial&exclude={part}&appid="+key;
   units = 'imperial';
   fetch("https://api.openweathermap.org/data/2.5/onecall?lat=41.667070&lon=-81.325810&units="+units+"&exclude={part}&appid=" + key)  
   .then(function(resp) { return resp.json() })
@@ -42,9 +44,21 @@ function weatherBalloon() {
       var x="";
 
     for (i = 1; i < 6; i++) {
+
+      skyView = data.daily[i].weather[0].main;
+      nextWeather = "";
+      if(skyView === "Clouds"){
+      nextWeather = "";
+      }else if ( skyView === "Rain"){
+      nextWeather = "<img src='./icon/rain.ico'>";
+     // nextWeather = "<img src='./icon/sun.png'>";
+    }else{nextWeather = ""}
+
       tomorrow = new Date(data.daily[i].dt* 1000).toLocaleString(undefined, {weekday: 'short'});
-      tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow+" <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
+      tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow + nextWeather + " <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
+
     }
+    //console.log(data.daily)
     document.getElementById("forecast").innerHTML = tomorrowText;
     }
 
@@ -113,5 +127,6 @@ function weatherBalloon() {
 }
 
 weatherBalloon()
+
 
 
