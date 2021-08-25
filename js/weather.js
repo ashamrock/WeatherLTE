@@ -43,27 +43,73 @@ function weatherBalloon() {
       var x="";
       var todayWeather = "";
 
-    if (data.current.weather[0].main === "Rain"){todayWeather = "<img src='./icon/rain.ico' style='height: 50px;'>"}
+      if (data.daily[0].rain >= 4) {
+        todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
+      } else if (data.daily[0].rain >= 2) 
+      {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
+      } else { todayWeather = "<img src='./icon/clear.png' style='height: 25px;'>";}
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
-    console.log("Right Now- " + data.current.weather[0].main)
+    console.log("Right Now- " + data.daily[0].weather[0].main)
+    console.log("rain- " + data.daily[0].rain)
+
+
 
     for (i = 1; i < 6; i++) {
-      skyView = data.daily[i].weather[0].main;
+      rainMeter = data.daily[i].rain;
       nextWeather = "";
 
-      if(skyView === "Clouds"){
-      nextWeather = "";
-      }else if ( skyView === "Rain"){
-      nextWeather = "<img src='./icon/rain.ico' style='height: 25px;'>";
-      // todayWeather = "<img src='./icon/rain.ico' style='height: 25px;'>";
-     // nextWeather = "<img src='./icon/sun.png'>";
-    }else{nextWeather = ""}
+dumbweather = "";
+rainraingoaway = 5;
+
+      if(data.daily[i].weather[0].main === "Clear") { 
+        nextWeather = "<img src='./icon/clear.png' style='height: 25px;'>";
+      } else {
+      
+        switch (data.daily[i].weather[0].main) {
+          case "Thunderstorm":
+            nextWeather = "<img src='./icon/thunderstorm.png' style='height: 25px;'>";
+            break;
+          case "Drizzle":
+            nextWeather = "<img src='./icon/drizzle.png' style='height: 25px;'>";
+            break;
+          case "Mist":
+            nextWeather = "<img src='./icon/mist.png' style='height: 25px;'>";
+            break;
+          case "Snow":
+            nextWeather = "<img src='./icon/snow.png' style='height: 25px;'>";          
+            break;
+          case "Clouds":
+            nextWeather = "<img src='./icon/clouds.png' style='height: 25px;'>";          
+            break;
+          case "Haze":
+            nextWeather = "<img src='./icon/haze.png' style='height: 25px;'>";          
+            break;
+          case "Rain":
+            if (data.daily[i].rain >= 4) {
+              nextWeather = "<img src='./icon/rain.png' style='height: 25px;'>";
+            } else if (data.daily[i].rain >= 2) 
+            {nextWeather = "<img src='./icon/clouds.png' style='height: 25px;'>";
+            } else { nextWeather = "<img src='./icon/clear.png' style='height: 25px;'>";}
+            break;
+          default:
+            nextWeather = "<img src='./icon/clear.png' style='height: 25px;'>";
+          }
+      }
+
 
       tomorrow = new Date(data.daily[i].dt* 1000).toLocaleString(undefined, {weekday: 'short'});
       tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow +" "+ nextWeather + " <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
 
-      console.log(tomorrow+"- "+skyView)
+      console.log(tomorrow+"- "+rainMeter)
     }
+
+
+
+
+
+
+
+
     //console.log(data.daily)
     document.getElementById("forecast").innerHTML = tomorrowText;
     }
