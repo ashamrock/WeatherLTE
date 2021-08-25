@@ -15,7 +15,6 @@ function update() {
 }
 update();
 
-
 function weatherBalloon() {
 
   la = config.SECRET_LA;
@@ -42,21 +41,28 @@ function weatherBalloon() {
       var i;
       var tomorrowText = "";
       var x="";
+      var todayWeather = "";
+
+    if (data.current.weather[0].main === "Rain"){todayWeather = "<img src='./icon/rain.ico' style='height: 50px;'>"}
+    document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
+    console.log("Right Now- " + data.current.weather[0].main)
 
     for (i = 1; i < 6; i++) {
-
       skyView = data.daily[i].weather[0].main;
       nextWeather = "";
+
       if(skyView === "Clouds"){
       nextWeather = "";
       }else if ( skyView === "Rain"){
-      nextWeather = "<img src='./icon/rain.ico'>";
+      nextWeather = "<img src='./icon/rain.ico' style='height: 25px;'>";
+      // todayWeather = "<img src='./icon/rain.ico' style='height: 25px;'>";
      // nextWeather = "<img src='./icon/sun.png'>";
     }else{nextWeather = ""}
 
       tomorrow = new Date(data.daily[i].dt* 1000).toLocaleString(undefined, {weekday: 'short'});
-      tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow + nextWeather + " <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
+      tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow +" "+ nextWeather + " <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
 
+      console.log(tomorrow+"- "+skyView)
     }
     //console.log(data.daily)
     document.getElementById("forecast").innerHTML = tomorrowText;
@@ -66,7 +72,6 @@ function weatherBalloon() {
       var refreshes = 0;
       var climate ;
       var timeOfDay = date.getHours()
-      console.log(data.current.weather[0].main)
 
       // refreshes++
       // console.log(refreshes)
