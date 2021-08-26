@@ -47,7 +47,7 @@ function weatherBalloon() {
         todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
       } else if (data.daily[0].rain >= 2) 
       {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
-      } else { todayWeather = "<img src='./icon/clear.png' style='height: 25px;'>";}
+      } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
     console.log("Right Now- " + data.daily[0].weather[0].main)
     console.log("rain- " + data.daily[0].rain)
