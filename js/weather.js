@@ -16,10 +16,9 @@ update();
 var refreshes = 0;
 
 function weatherBalloon() {
-  console.log(currentTime)
-  var fresh = 0;
-  console.log("freshness- "+refreshes)
-  console.log("fresh- "+fresh)
+
+  console.log("freshness- "+currentTime)
+
 
   la = config.SECRET_LA;
   lo = config.SECRET_LO;
@@ -35,8 +34,7 @@ function weatherBalloon() {
     sunrise =  new Date(data.current.sunrise * 1000).toLocaleTimeString();;
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
 
-    // console.log(data)
-   console.log("Right Now- " + data.current.weather[0].main + " - " + data.hourly[0].pop)
+  // console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
 
     function currentTemp(){
     document.getElementById("temp").innerHTML = todayTemp+"°";
@@ -50,9 +48,9 @@ function weatherBalloon() {
       var x="";
       var todayWeather = "";
 
-      if (data.daily[0].rain >= 4) {
+      if (data.daily[0].pop >= .3) {
         todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
-      } else if (data.daily[0].rain >= 2) 
+      } else if (data.daily[0].pop >= .2) 
       {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
       } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
@@ -83,10 +81,13 @@ function weatherBalloon() {
           case "Haze":
             nextWeather = "<img src='./icon/haze.png' style='height: 25px;'>";          
             break;
+          case "Fog":
+            nextWeather = "<img src='./icon/haze.png' style='height: 25px;'>";          
+            break;
           case "Rain":
-            if (data.daily[i].rain >= 4) {
+            if (data.daily[i].pop >= .3) {
               nextWeather = "<img src='./icon/rain.png' style='height: 25px;'>";
-            } else if (data.daily[i].rain >= 2) 
+            } else if (data.daily[i].pop >= .2) 
             {nextWeather = "<img src='./icon/clouds.png' style='height: 25px;'>";
             } else { nextWeather = "<img src='./icon/clear.png' style='height: 25px;'>";}
             break;
@@ -95,11 +96,9 @@ function weatherBalloon() {
           }
       }
 
-
       tomorrow = new Date(data.daily[i].dt* 1000).toLocaleString(undefined, {weekday: 'short'});
       tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow +" "+ nextWeather + " <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
 
-      // console.log(i+" "+tomorrow+"- "+data.daily[i].pop)
     }
 
     document.getElementById("forecast").innerHTML = tomorrowText;
@@ -143,9 +142,9 @@ function weatherBalloon() {
         case "Haze":
           climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
           break;
-          case "Fog":
-            climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
-            break;
+        case "Fog":
+          climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
+          break;
         default:
             text = '<div icon="supermoon" data-label="Cool!"><span class="moon"></span><span class="meteor"></span></div>';
       }
@@ -238,17 +237,16 @@ for (i = 0; i < 12; i++){
   }
 
   refreshes ++;
-  fresh ++;
     currentTemp()
     forecast()
     bigIcons()
     graphIt()
-    setTimeout(weatherBalloon, 900000 );
-    //15 minute updates
   })
   .catch(function() {
     // catch any errors
   });
+  setTimeout(weatherBalloon, 900000 );
+  //15 minute updates
 }
 
 weatherBalloon()
