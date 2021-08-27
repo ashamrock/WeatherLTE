@@ -13,11 +13,11 @@ function update() {
 }
 update();
 
-var refreshes = 0;
+// var refreshes = 0;
 
 function weatherBalloon() {
 
-  console.log("freshness- "+currentTime)
+  // console.log("freshness- "+currentTime)
 
 
   la = config.SECRET_LA;
@@ -230,13 +230,13 @@ for (i = 0; i < 12; i++){
         },
       },
     });
-
+    console.log(timeArray)
     var timeArray = [];
     var tempData = [];
     var rainData = [];
+    console.log(timeArray)
   }
 
-  refreshes ++;
     currentTemp()
     forecast()
     bigIcons()
