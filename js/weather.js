@@ -1,5 +1,3 @@
-
-
 function update() {
   date = new Date();
   dayIndex = date.getDay()
@@ -52,14 +50,9 @@ function weatherBalloon() {
     console.log("Right Now- " + data.daily[0].weather[0].main)
     console.log("rain- " + data.daily[0].rain)
 
-
-
     for (i = 1; i < 6; i++) {
       rainMeter = data.daily[i].rain;
       nextWeather = "";
-
-dumbweather = "";
-rainraingoaway = 5;
 
       if(data.daily[i].weather[0].main === "Clear") { 
         nextWeather = "<img src='./icon/clear.png' style='height: 25px;'>";
@@ -107,7 +100,6 @@ rainraingoaway = 5;
     }
 
     function bigIcons(){
-      var refreshes = 0;
       var climate ;
       var timeOfDay = date.getHours()
 
@@ -200,7 +192,27 @@ console.log(rainData)
         }]
       },
       options: {
-        responsive: true,
+        scales: {
+          y: {
+            grid:{
+              color: 'rgba(255, 255, 255, 0.24)',
+            },
+              ticks: {
+                color: 'rgba(255, 255, 255, 0.836)',
+                font: {
+                     size: 18,
+                },
+              }
+          },
+          x: {
+            ticks: {
+              color: 'rgba(255, 255, 255, 0.836)',
+              font: {
+                   size: 18,
+              },
+            }
+        },
+      },
         plugins: {
           legend: {
            display: false,
@@ -208,7 +220,7 @@ console.log(rainData)
           title: {
             display: false,
           }
-        }
+        },
       },
     });
 

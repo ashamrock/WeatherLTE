@@ -195,11 +195,11 @@ padding-top: 30px;
   position: absolute;
 }
 
-.graph{
-  font-size: 200px;
-  font-weight: 575;
+.myChart{
+  color: rgba(255, 255, 255, 0.836);
+  font-size: 100px;
   width:100%;
-  max-width:600px;
+  max-width:650px;
   top: 150px;
   position: relative; 
 }
