@@ -16,6 +16,7 @@ update();
 var refreshes = 0;
 
 function weatherBalloon() {
+  console.log(currentTime)
   var fresh = 0;
   console.log("freshness- "+refreshes)
   console.log("fresh- "+fresh)
@@ -244,7 +245,6 @@ for (i = 0; i < 12; i++){
     graphIt()
     setTimeout(weatherBalloon, 900000 );
     //15 minute updates
-    //1800000
   })
   .catch(function() {
     // catch any errors
