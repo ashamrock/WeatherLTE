@@ -194,3 +194,12 @@ padding-top: 30px;
   left: 150px;
   position: absolute;
 }
+
+.graph{
+  font-size: 200px;
+  font-weight: 575;
+  width:100%;
+  max-width:600px;
+  top: 150px;
+  position: relative; 
+}

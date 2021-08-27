@@ -103,14 +103,6 @@ rainraingoaway = 5;
       console.log(tomorrow+"- "+rainMeter)
     }
 
-
-
-
-
-
-
-
-    //console.log(data.daily)
     document.getElementById("forecast").innerHTML = tomorrowText;
     }
 
@@ -118,9 +110,6 @@ rainraingoaway = 5;
       var refreshes = 0;
       var climate ;
       var timeOfDay = date.getHours()
-
-      // refreshes++
-      // console.log(refreshes)
 
       if(timeOfDay < 6) { 
         climate = '<div icon="supermoon" data-label="Cool!"><span class="moon"></span><span class="meteor"></span></div>'
@@ -165,9 +154,73 @@ rainraingoaway = 5;
       document.getElementById("getIcon").innerHTML = climate;
     }
 
+  function graphIt(){
+    console.log(data)
+    var timeArray = [];
+    var tempData = [];
+    var rainData = [];
+    var timeOffset=0;
+    var timeOffset2=0;
+    var dt = new Date();
+    var hours = dt.getHours() ; 
+    hours = (hours % 12) || 12;
+
+    for (i = hours; i < 13; i++) { 
+    timeArray.push (hours+timeOffset)
+    timeOffset++;
+    }
+
+    if (timeArray.length<12){
+      for (i = timeArray.length; i < 12; i++) { 
+      timeOffset2 ++
+      timeArray.push (timeOffset2)
+      }
+    }
+
+for (i = 0; i < 12; i++){
+  tempData.push(data.hourly[i].temp)
+  rainData.push(data.hourly[i].pop *100)
+}
+console.log(rainData)
+
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: timeArray,
+        datasets: [{ 
+          data: tempData,
+          borderColor: "red",
+          fill: false,
+          tension: 0.4,
+        }, { 
+          data: rainData,
+          borderColor: "blue",
+          fill: false,
+          tension: 0.4,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+           display: false,
+          },
+          title: {
+            display: false,
+          }
+        }
+      },
+    });
+
+    var timeArray = [];
+    var tempData = [];
+    var rainData = [];
+  }
+
     currentTemp()
     forecast()
     bigIcons()
+    graphIt()
     setTimeout(weatherBalloon, 900000 );
     //15 minute updates
     //1800000
