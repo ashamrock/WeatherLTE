@@ -1,5 +1,5 @@
-@import url(//fonts.googleapis.com/css?family=Lato:300,300italic);
-
+/* @import url(//fonts.googleapis.com/css?family=Lato:300,300italic); */
+@font-face { font-family: Lato; src: url('Lato-Light.ttf'); } 
 /* ---------- vv Common vv ---------- */
 
 body {
