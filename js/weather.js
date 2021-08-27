@@ -13,7 +13,12 @@ function update() {
 }
 update();
 
+var refreshes = 0;
+
 function weatherBalloon() {
+  var fresh = 0;
+  console.log("freshness- "+refreshes)
+  console.log("fresh- "+fresh)
 
   la = config.SECRET_LA;
   lo = config.SECRET_LO;
@@ -28,6 +33,9 @@ function weatherBalloon() {
     todayTemp = Math.round(data.current.temp);
     sunrise =  new Date(data.current.sunrise * 1000).toLocaleTimeString();;
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
+
+    // console.log(data)
+   console.log("Right Now- " + data.current.weather[0].main + " - " + data.hourly[0].pop)
 
     function currentTemp(){
     document.getElementById("temp").innerHTML = todayTemp+"°";
@@ -47,11 +55,8 @@ function weatherBalloon() {
       {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
       } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
-    console.log("Right Now- " + data.daily[0].weather[0].main)
-    console.log("rain- " + data.daily[0].rain)
 
     for (i = 1; i < 6; i++) {
-      rainMeter = data.daily[i].rain;
       nextWeather = "";
 
       if(data.daily[i].weather[0].main === "Clear") { 
@@ -93,7 +98,7 @@ function weatherBalloon() {
       tomorrow = new Date(data.daily[i].dt* 1000).toLocaleString(undefined, {weekday: 'short'});
       tomorrowText = tomorrowText + '<div class="tomorrow">' + tomorrow +" "+ nextWeather + " <br>"+Math.round(data.daily[i].temp.min)+"° | "+ Math.round(data.daily[i].temp.max)+"°"  + "</div>";
 
-      console.log(tomorrow+"- "+rainMeter)
+      // console.log(i+" "+tomorrow+"- "+data.daily[i].pop)
     }
 
     document.getElementById("forecast").innerHTML = tomorrowText;
@@ -137,6 +142,9 @@ function weatherBalloon() {
         case "Haze":
           climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
           break;
+          case "Fog":
+            climate = '<div icon="cloudy" data-label="Perfect"><span class="cloud"></span></div>';
+            break;
         default:
             text = '<div icon="supermoon" data-label="Cool!"><span class="moon"></span><span class="meteor"></span></div>';
       }
@@ -147,7 +155,6 @@ function weatherBalloon() {
     }
 
   function graphIt(){
-    console.log(data)
     var timeArray = [];
     var tempData = [];
     var rainData = [];
@@ -171,9 +178,9 @@ function weatherBalloon() {
 
 for (i = 0; i < 12; i++){
   tempData.push(data.hourly[i].temp)
-  rainData.push(data.hourly[i].pop *100)
+  rainData.push(data.hourly[i].pop *10)
 }
-console.log(rainData)
+// console.log(rainData)
 
     new Chart("myChart", {
       type: "line",
@@ -229,6 +236,8 @@ console.log(rainData)
     var rainData = [];
   }
 
+  refreshes ++;
+  fresh ++;
     currentTemp()
     forecast()
     bigIcons()
