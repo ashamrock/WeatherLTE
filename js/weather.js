@@ -13,12 +13,7 @@ function update() {
 }
 update();
 
-// var refreshes = 0;
-
 function weatherBalloon() {
-
-  // console.log("freshness- "+currentTime)
-
 
   la = config.SECRET_LA;
   lo = config.SECRET_LO;
@@ -155,6 +150,7 @@ function weatherBalloon() {
     }
 
   function graphIt(){
+
     var timeArray = [];
     var tempData = [];
     var rainData = [];
@@ -180,9 +176,12 @@ for (i = 0; i < 12; i++){
   tempData.push(data.hourly[i].temp)
   rainData.push(data.hourly[i].pop *10)
 }
-// console.log(rainData)
 
-    new Chart("myChart", {
+if(window.myNewChart1 != null){
+  window.myNewChart1.destroy();
+  }
+
+window.myNewChart1 = new Chart("myChart", {
       type: "line",
       data: {
         labels: timeArray,
@@ -199,6 +198,7 @@ for (i = 0; i < 12; i++){
         }]
       },
       options: {
+        animation : false,
         scales: {
           y: {
             grid:{
@@ -235,21 +235,23 @@ for (i = 0; i < 12; i++){
     var tempData = [];
     var rainData = [];
     console.log(timeArray)
+
   }
 
+  
     currentTemp()
     forecast()
     bigIcons()
     graphIt()
+    console.log("weatherBalloon")
+    setTimeout(weatherBalloon, 3000 );
+
   })
   .catch(function() {
     // catch any errors
   });
-  setTimeout(weatherBalloon, 900000 );
+  // setTimeout(weatherBalloon, 1000 );
   //15 minute updates
 }
 
 weatherBalloon()
-
-
-
