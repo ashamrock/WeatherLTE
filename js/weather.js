@@ -244,7 +244,7 @@ window.myNewChart1 = new Chart("myChart", {
     bigIcons()
     graphIt()
     console.log("weatherBalloon")
-    setTimeout(weatherBalloon, 3000 );
+    setTimeout(weatherBalloon, 900000 );
 
   })
   .catch(function() {
