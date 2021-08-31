@@ -29,7 +29,7 @@ function weatherBalloon() {
     sunrise =  new Date(data.current.sunrise * 1000).toLocaleTimeString();;
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
 
-  // console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
+console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
 
     function currentTemp(){
     document.getElementById("temp").innerHTML = todayTemp+"°";
@@ -230,12 +230,9 @@ window.myNewChart1 = new Chart("myChart", {
         },
       },
     });
-    console.log(timeArray)
     var timeArray = [];
     var tempData = [];
     var rainData = [];
-    console.log(timeArray)
-
   }
 
   
@@ -243,7 +240,6 @@ window.myNewChart1 = new Chart("myChart", {
     forecast()
     bigIcons()
     graphIt()
-    console.log("weatherBalloon")
     setTimeout(weatherBalloon, 900000 );
 
   })
