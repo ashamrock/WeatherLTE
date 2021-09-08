@@ -42,10 +42,12 @@ console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0]
       var tomorrowText = "";
       var x="";
       var todayWeather = "";
+      var rainHigh = 1;
+      var rainLow = .8;
 
-      if (data.daily[0].pop >= .3) {
+      if (data.daily[0].pop >= rainHigh) {
         todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
-      } else if (data.daily[0].pop >= .2) 
+      } else if (data.daily[0].pop >= rainLow) 
       {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
       } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
@@ -80,9 +82,9 @@ console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0]
             nextWeather = "<img src='./icon/haze.png' style='height: 25px;'>";          
             break;
           case "Rain":
-            if (data.daily[i].pop >= .3) {
+            if (data.daily[i].pop >= rainHigh) {
               nextWeather = "<img src='./icon/rain.png' style='height: 25px;'>";
-            } else if (data.daily[i].pop >= .2) 
+            } else if (data.daily[i].pop >= rainLow) 
             {nextWeather = "<img src='./icon/clouds.png' style='height: 25px;'>";
             } else { nextWeather = "<img src='./icon/clear.png' style='height: 25px;'>";}
             break;
