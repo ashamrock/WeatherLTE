@@ -30,6 +30,7 @@ function weatherBalloon() {
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
 
 console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
+console.log(data)
 
     function currentTemp(){
     document.getElementById("temp").innerHTML = todayTemp+"°";
@@ -42,14 +43,20 @@ console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0]
       var tomorrowText = "";
       var x="";
       var todayWeather = "";
-      var rainHigh = 1;
-      var rainLow = .8;
+      var rainHigh = .8;
+      var rainLow = .5;
 
-      if (data.daily[0].pop >= rainHigh) {
-        todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
-      } else if (data.daily[0].pop >= rainLow) 
-      {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
-      } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
+      for (i = 0; i < 16; i++) {
+       if (data.hourly[i].pop >=rainHigh){todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
+       }else if(data.hourly[i].pop >=rainLow){todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
+       }else{todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
+      }
+
+      // if (data.daily[0].pop >= rainHigh) {
+      //   todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
+      // } else if (data.daily[0].pop >= rainLow) 
+      // {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
+      // } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
 
     for (i = 1; i < 6; i++) {
@@ -160,7 +167,7 @@ console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0]
     var timeOffset2=0;
     var dt = new Date();
     var hours = dt.getHours() ; 
-    hours = (hours % 12) || 12;
+    var hours = (hours % 12) || 12;
 
     for (i = hours; i < 13; i++) { 
     timeArray.push (hours+timeOffset)
@@ -176,7 +183,8 @@ console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0]
 
 for (i = 0; i < 12; i++){
   tempData.push(data.hourly[i].temp)
-  rainData.push(data.hourly[i].pop *10)
+  rainData.push(data.hourly[i].pop *100)
+
 }
 
 if(window.myNewChart1 != null){
