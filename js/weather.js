@@ -30,7 +30,7 @@ function weatherBalloon() {
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
 
 console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
-console.log(data)
+// console.log(data)
 
     function currentTemp(){
     document.getElementById("temp").innerHTML = todayTemp+"°";
@@ -41,23 +41,25 @@ console.log(data)
     function forecast(){
       var i;
       var tomorrowText = "";
-      var x="";
       var todayWeather = "";
-      var rainHigh = .8;
-      var rainLow = .5;
+      var rainHigh = 0.6;
+      var rainLow = 0.3;
+      var rainForecast = [];
 
       for (i = 0; i < 16; i++) {
-       if (data.hourly[i].pop >=rainHigh){todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
-       }else if(data.hourly[i].pop >=rainLow){todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
-       }else{todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
+        rainForecast.push(data.hourly[i].pop)
       }
 
-      // if (data.daily[0].pop >= rainHigh) {
-      //   todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
-      // } else if (data.daily[0].pop >= rainLow) 
-      // {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
-      // } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
+      rainForecast.sort()
+
+      if (rainForecast.at(15) >= rainHigh) {
+        todayWeather = "<img src='./icon/rain.png' style='height: 50px;'>";
+      } else if (rainForecast.at(15) >= rainLow) 
+      {todayWeather = "<img src='./icon/clouds.png' style='height: 50px;'>";
+      } else { todayWeather = "<img src='./icon/clear.png' style='height: 50px;'>";}
+    
     document.getElementById("skyview").innerHTML = '<div class="tomorrow">' + todayWeather + "</div>";
+    rainForecast = [];
 
     for (i = 1; i < 6; i++) {
       nextWeather = "";
