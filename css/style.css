@@ -13,61 +13,124 @@ body {
   /* text-align:center; */
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   display: none;
-}
+} */
 
 .interface{
 opacity: 100%;
-
 }
+
+
 
 .topBar {
-  position: fixed; 
+  position: fixed;
+  width: 100%;
   top: 0px;
   left:0px;
-  min-width: 570px;
-  max-width: 570px;
   border-bottom: 4px solid rgba(255, 255, 255, 0.24);
-}
-
-.navBar{
-  position: fixed; 
-  top: 0px;
-  right:0px;
-  min-height: 100%;
-  max-width: 80px;
-  background: rgba(255, 255, 255, 0.24);
-}
-
-.icon-bar a {
-  display: block;
-  text-align: center;
-  padding: 38px 10px 38px 10px;
-  color: gray;
-  font-size: 36px;
 }
 
 .time {
   font-size: 55px;
-  /* margin: 5px; */
   font-weight: bold;
-  padding-left: 15px;
-  max-width: 450px;
 }
 
 .date {
   font-size: 40px;
   padding-left: 20px;
-  max-width: 475px;
 }
 
 .temp{
   position: fixed;
-  font-size: 70px;
-  /* font-weight: bold; */
+  font-size: 100px;
+  font-weight: bold;
   top: 5px;
-  right: 250px
+  right: 20px;
+}
+
+
+
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.container__main {
+  /* Take the remaining height */
+  flex-grow: 1;
+
+  /* Layout the left sidebar, main content and right sidebar */
+  display: flex;
+  flex-direction: row;
+}
+
+.container__left {
+  width: 50%;
+}
+
+.container__middle {
+  /* Take the remaining width */
+  flex-grow: 1;
+}
+
+.container__right {
+  width: 20%;
+}
+
+
+
+.forecastBar{
+  position: fixed; 
+  top: 130px;
+  right:20px;
+  max-width: 135px;
+  height: 100%;
+  border-left: 4px solid rgba(255, 255, 255, 0.24);
+  text-align: center;
+}
+
+
+
+.stocks{
+  position: fixed; 
+  top: 130px;
+  right:175px;
+  /* max-width: 135px; */
+  height: 100%;
+  border-left: 4px solid rgba(255, 255, 255, 0.24);
+  text-align: center;
+}
+
+.stock{
+padding: 20px;
+}
+
+.stockName{
+text-decoration: underline;
+font-size: 20px;
+}
+.stockPrice{
+font-weight: bold;
+font-size: 30px;
+}
+.bottom-bar{
+  position: fixed;
+  bottom: 5px;
+  left: 20px;
+  height: 50px;
+
+}
+
+.chart-container{
+  position: fixed;
+  margin: auto;
+  bottom: 0;
+  /* left: 0; */
+  width: 800px;
 }
 
 .off{
@@ -112,16 +175,6 @@ padding-top: 30px;
 .sunSet{
   padding-top: 5px;
   font-size: 20px;
-}
-
-.forecastBar{
-  position: fixed; 
-  top: 0px;
-  right:60px;
-  max-width: 135px;
-  height: 100%;
-  border-left: 4px solid rgba(255, 255, 255, 0.24);
-  text-align: center;
 }
 
 .tomorrow{
@@ -195,11 +248,3 @@ padding-top: 30px;
   position: absolute;
 }
 
-.myChart{
-  color: rgba(255, 255, 255, 0.836);
-  font-size: 100px;
-  width:100%;
-  max-width:650px;
-  top: 150px;
-  position: relative; 
-}
