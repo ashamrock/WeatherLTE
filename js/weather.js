@@ -1,3 +1,9 @@
+var stockName1 = $(".stock1-name");
+var stockPrice1 = $(".stock1-price");
+
+var stockName2 = $(".stock2-name");
+var stockPrice2 = $(".stock2-price");
+
 function update() {
   date = new Date();
   dayIndex = date.getDay()
@@ -8,10 +14,68 @@ function update() {
  });
   document.getElementById("time").innerHTML = currentTime;
   document.getElementById("date").innerHTML = today;
-
+  getStocks();
   setTimeout(update, 30000);
 }
 update();
+
+
+
+function getStocks(){
+
+  stockKey = config.STOCK_KEY;
+
+  const stock1 = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://yh-finance.p.rapidapi.com/stock/v2/get-summary?symbol=TSLA&region=US",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "yh-finance.p.rapidapi.com",
+      "x-rapidapi-key": stockKey
+    }
+  };
+
+  const stock2 = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://yh-finance.p.rapidapi.com/stock/v2/get-summary?symbol=DOGE-USD&region=US",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "yh-finance.p.rapidapi.com",
+      "x-rapidapi-key": stockKey
+    }
+  };
+
+  // stockName1.empty();
+  // stockPrice1.empty();
+
+  // stockName2.empty();
+  // stockPrice2.empty();
+
+  $.ajax(stock1).done(function (response) {
+    var tickerName = response.symbol;
+    var tickerPrice = response.price.regularMarketPrice.raw;
+    let price = tickerPrice.toFixed(2);
+    document.getElementById("stock1-name").innerHTML = tickerName;
+    document.getElementById("stock1-price").innerHTML = price;
+    // console.log(response)
+  });
+
+  $.ajax(stock2).done(function (response) {
+    var tickerName = response.symbol;
+    var tickerPrice = response.price.regularMarketPrice.raw;
+    let price = tickerPrice.toFixed(3);
+    document.getElementById("stock2-name").innerHTML = tickerName;
+    document.getElementById("stock2-price").innerHTML = price;
+    // console.log(response)
+  });
+
+
+};
+
+
+
 
 function weatherBalloon() {
 
