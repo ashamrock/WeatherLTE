@@ -14,7 +14,7 @@ function update() {
  });
   document.getElementById("time").innerHTML = currentTime;
   document.getElementById("date").innerHTML = today;
-  getStocks();
+
   setTimeout(update, 30000);
 }
 update();
@@ -24,57 +24,74 @@ update();
 function getStocks(){
 
   stockKey = config.STOCK_KEY;
+  stockKey2 = config.STOCK_KEY1;
+
+  ticker1 = "NVDA";
+  ticker2 = "ZM";
+  ticker3 = "TSLA";
+  Cryptik1 = "DOGE";
 
   const stock1 = {
     "async": true,
     "crossDomain": true,
-    "url": "https://yh-finance.p.rapidapi.com/stock/v2/get-summary?symbol=TSLA&region=US",
+    "url": 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker1 + '&apikey=stockKey2',
     "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "yh-finance.p.rapidapi.com",
-      "x-rapidapi-key": stockKey
-    }
   };
+
+  $.ajax(stock1).done(function (response) {
+    var tickerName = response["Global Quote"]["01. symbol"];
+    var tickerPrice = response["Global Quote"]["05. price"];
+    document.getElementById("stock1-name").innerHTML = tickerName;
+    document.getElementById("stock1-price").innerHTML = Number(tickerPrice);
+  });
 
   const stock2 = {
     "async": true,
     "crossDomain": true,
-    "url": "https://yh-finance.p.rapidapi.com/stock/v2/get-summary?symbol=DOGE-USD&region=US",
+    "url": 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker2 + '&apikey=stockKey2',
     "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "yh-finance.p.rapidapi.com",
-      "x-rapidapi-key": stockKey
-    }
   };
 
-  // stockName1.empty();
-  // stockPrice1.empty();
-
-  // stockName2.empty();
-  // stockPrice2.empty();
-
-  $.ajax(stock1).done(function (response) {
-    var tickerName = response.symbol;
-    var tickerPrice = response.price.regularMarketPrice.raw;
-    let price = tickerPrice.toFixed(2);
-    document.getElementById("stock1-name").innerHTML = tickerName;
-    document.getElementById("stock1-price").innerHTML = price;
-    // console.log(response)
-  });
-
   $.ajax(stock2).done(function (response) {
-    var tickerName = response.symbol;
-    var tickerPrice = response.price.regularMarketPrice.raw;
-    let price = tickerPrice.toFixed(3);
+    var tickerName = response["Global Quote"]["01. symbol"];
+    var tickerPrice = response["Global Quote"]["05. price"];
     document.getElementById("stock2-name").innerHTML = tickerName;
-    document.getElementById("stock2-price").innerHTML = price;
-    // console.log(response)
+    document.getElementById("stock2-price").innerHTML = Number(tickerPrice);
   });
 
+  const stock3 = {
+    "async": true,
+    "crossDomain": true,
+    "url": 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=' + ticker3 + '&apikey=stockKey2',
+    "method": "GET",
+  };
 
+  $.ajax(stock3).done(function (response) {
+    var tickerName = response["Global Quote"]["01. symbol"];
+    var tickerPrice = response["Global Quote"]["05. price"];
+    document.getElementById("stock3-name").innerHTML = tickerName;
+    document.getElementById("stock3-price").innerHTML = Number(tickerPrice);
+  });
+
+  const stock4 = {
+    "async": true,
+    "crossDomain": true,
+    "url": 'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=' + Cryptik1 + '&to_currency=USD&apikey=stockKey2',
+    "method": "GET",
+  };
+
+  $.ajax(stock4).done(function (response) {
+    console.log(response)
+    var tickerName = response["Realtime Currency Exchange Rate"]["1. From_Currency Code"];
+    var tickerPrice = response["Realtime Currency Exchange Rate"]["9. Ask Price"];
+    document.getElementById("stock4-name").innerHTML = tickerName;
+    document.getElementById("stock4-price").innerHTML = Number(tickerPrice);
+  });
+
+  // setTimeout(getStocks, 3.6e+6)
 };
 
-
+getStocks();
 
 
 function weatherBalloon() {
@@ -92,7 +109,6 @@ function weatherBalloon() {
     todayTemp = Math.round(data.current.temp);
     sunrise =  new Date(data.current.sunrise * 1000).toLocaleTimeString();;
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
-
 console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
 // console.log(data)
 
