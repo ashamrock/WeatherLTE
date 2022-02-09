@@ -21,7 +21,10 @@ body {
 opacity: 100%;
 }
 
-
+.update-time{
+  font-size: 15px;
+  text-align: center;
+}
 
 .topBar {
   position: fixed;

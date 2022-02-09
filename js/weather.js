@@ -4,11 +4,15 @@ var stockPrice1 = $(".stock1-price");
 var stockName2 = $(".stock2-name");
 var stockPrice2 = $(".stock2-price");
 
+
 function update() {
   date = new Date();
-  dayIndex = date.getDay()
+  // dayIndex = date.getDay()
   currentTime = date.toLocaleTimeString([], {timeStyle: 'short'})
   currentDate = date.toDateString();
+  updateTime = new Date().toLocaleString(undefined, {
+    weekday: 'short', month: "short", day: "numeric", 
+ });
   today = new Date().toLocaleString(undefined, {
     weekday: 'long', month: "long", day: "numeric", 
  });
@@ -22,6 +26,16 @@ update();
 
 
 function getStocks(){
+
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+  // var yyyy = today.getFullYear();
+  today = mm + '/' + dd 
+  updateTime =today + " " + currentTime
+  console.log(updateTime);
+
+  document.getElementById("update-time").innerHTML = (today + " " + currentTime);
 
   stockKey = config.STOCK_KEY;
   stockKey2 = config.STOCK_KEY1;
@@ -81,14 +95,13 @@ function getStocks(){
   };
 
   $.ajax(stock4).done(function (response) {
-    console.log(response)
     var tickerName = response["Realtime Currency Exchange Rate"]["1. From_Currency Code"];
     var tickerPrice = response["Realtime Currency Exchange Rate"]["9. Ask Price"];
     document.getElementById("stock4-name").innerHTML = tickerName;
     document.getElementById("stock4-price").innerHTML = Number(tickerPrice);
   });
 
-  // setTimeout(getStocks, 3.6e+6)
+   setTimeout(getStocks, 3.6e+6)
 };
 
 getStocks();
