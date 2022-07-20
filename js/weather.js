@@ -122,7 +122,8 @@ function weatherBalloon() {
     todayTemp = Math.round(data.current.temp);
     sunrise =  new Date(data.current.sunrise * 1000).toLocaleTimeString();;
     sunset =  new Date(data.current.sunset * 1000).toLocaleTimeString();;
-console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
+    //ERROr ----------------------- ERROR ---------------------------------
+//console.log("Right Now- " + data.current.weather[0].main + " - " + data.daily[0].pop)
 // console.log(data)
 
     function currentTemp(){
